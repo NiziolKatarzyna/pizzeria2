@@ -100,6 +100,9 @@
       thisProduct.priceElem = thisProduct.element.querySelector(
         select.menuProduct.priceElem
       );
+      thisProduct.imageWrapper = thisProduct.element.querySelector(
+        select.menuProduct.imageWrapper
+      );
     }
 
     initAccordion() {
@@ -184,6 +187,23 @@
             if (option.default) {
               // reduce price variable
               price = price - option.price;
+            }
+          }
+          const optionImage =
+            //thisProduct.imageWrapper.querySelector('.sauce-cream');
+            thisProduct.imageWrapper.querySelector(
+              '.' + paramId + '-' + optionId
+            );
+
+          if (
+            optionImage &&
+            formData[paramId] &&
+            formData[paramId].includes(optionId)
+          ) {
+            optionImage.classList.add(classNames.menuProduct.imageVisible);
+          } else {
+            if (optionImage && formData[paramId]) {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
         }
