@@ -65,9 +65,10 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
       thisProduct.processOrder();
 
-      console.log('new Product:', thisProduct);
+      //  console.log('new Product:', thisProduct);
     }
 
     renderInMenu() {
@@ -103,6 +104,9 @@
       thisProduct.imageWrapper = thisProduct.element.querySelector(
         select.menuProduct.imageWrapper
       );
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(
+        select.menuProduct.amountWidget
+      );
     }
 
     initAccordion() {
@@ -121,7 +125,7 @@
         const activeProduct = document.querySelector(
           select.all.menuProductsActive
         );
-        console.log(activeProduct);
+        // console.log(activeProduct);
         /* if there is active product and it's not thisProduct.element, remove class active from it */
 
         if (activeProduct && activeProduct !== thisProduct.element) {
@@ -134,6 +138,7 @@
         );
       });
     }
+
     initOrderForm() {
       const thisProduct = this;
       thisProduct.form.addEventListener('submit', function (event) {
@@ -152,7 +157,13 @@
         thisProduct.processOrder();
       });
 
-      console.log(this.initOrderForm);
+      // console.log(this.initOrderForm);
+    }
+
+    initAmountWidget() {
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
     }
 
     processOrder() {
@@ -161,19 +172,19 @@
       console.log('formData: ', formData);
       // set price to default price
       let price = thisProduct.data.price;
-      console.log(price);
+      // console.log(price);
 
       // for every category (param)...
       for (let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
-        console.log(paramId, param);
+        // console.log(paramId, param);
 
         // for every option in this category
         for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          console.log(optionId, option);
+          //  console.log(optionId, option);
 
           const optionSelected =
             formData[paramId] && formData[paramId].includes(optionId);
@@ -209,6 +220,32 @@
 
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
+    }
+  }
+
+  class AmountWidget {
+    constructor(element) {
+      const thisWidget = this;
+
+      thisWidget.getElements(element);
+
+      console.log('AmountWidget: ', thisWidget);
+      console.log('constructor arguments: ', element);
+    }
+
+    getElements(element) {
+      const thisWidget = this;
+
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(
+        select.widgets.amount.input
+      );
+      thisWidget.linkDecrease = thisWidget.element.querySelector(
+        select.widgets.amount.linkDecrease
+      );
+      thisWidget.linkIncrease = thisWidget.element.querySelector(
+        select.widgets.amount.linkIncrease
+      );
     }
   }
 
