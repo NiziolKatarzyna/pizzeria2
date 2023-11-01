@@ -236,7 +236,13 @@
       const thisWidget = this;
 
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+
+      if (!isNaN(thisWidget.input.value)) {
+        thisWidget.setValue(settings.amountWidget.defaultValue);
+      } else {
+        thisWidget.setValue(thisWidget.input.value);
+      }
+
       thisWidget.initActions();
 
       console.log('AmountWidget: ', thisWidget);
