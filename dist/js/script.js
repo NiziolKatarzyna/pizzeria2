@@ -498,6 +498,10 @@
         'updated',
         function (event) {
           event.preventDefault();
+          thisCartProduct.amount = thisCartProduct.dom.amountWidget.value;
+          thisCartProduct.price =
+            thisCartProduct.priceSingle * thisCartProduct.amount;
+          thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
         }
       );
     }
