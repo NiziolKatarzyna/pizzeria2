@@ -280,6 +280,7 @@
       const thisProduct = this;
 
       app.cart.add(thisProduct.prepareCartProduct());
+      //console.log('moj koszyk', app.cart);
     }
 
     prepareCartProduct() {
@@ -425,7 +426,9 @@
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(
         select.cart.toggleTrigger
       );
-      thisCart.dom.productList = select.containerOf.menu;
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(
+        select.cart.productList
+      );
     }
 
     initActions() {
@@ -438,6 +441,14 @@
 
     add(menuProduct) {
       const thisCart = this;
+      const generateHTML = templates.cartProduct(menuProduct);
+
+      // const generateDOM = ;
+      const generatedDOM = utils.createDOMFromHTML(generateHTML);
+
+      // Dodaj wygenerowany element DOM do thisCart.dom.productList
+      thisCart.dom.productList.appendChild(generatedDOM);
+      //thisCart.dom.productList.appendChild(generateDOM);
       console.log('adding product', menuProduct);
     }
   }
