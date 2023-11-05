@@ -453,6 +453,25 @@
 
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       console.log('thisCart.products', thisCart.products);
+      thisCart.update();
+    }
+    update() {
+      const thisCart = this;
+      const deliveryFee = settings.cart.defaultDeliveryFee;
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+
+      for (let product of thisCart.products) {
+        totalNumber += product.amount;
+        subtotalPrice += product.price;
+      }
+      if (!isNaN(totalNumber)) {
+        thisCart.totalPrice = subtotalPrice + deliveryFee;
+        console.log('total price', thisCart.totalPrice);
+      } else {
+        thisCart.totalPrice = 0;
+      }
+      console.log('stale', thisCart);
     }
   }
 
