@@ -298,6 +298,7 @@
         price: thisProduct.price,
         params: thisProduct.prepareCartProductParams(),
       };
+
       return productSummary;
     }
 
@@ -328,7 +329,7 @@
             formData[paramId] && formData[paramId].includes(optionId);
           // check if there is param with a name of paramId in formData and if it includes optionId
           if (optionSelected) {
-            params[paramId].options = option.label;
+            params[paramId].options[optionId] = option.label;
           }
         }
       }
@@ -530,7 +531,6 @@
       thisCart.menuProduct = cartProduct;
       //console.log('element remove', thisCart.menuProduct);
 
-      thisCart.dom.productList.removeChild(cartProduct.dom.wrapper);
       //thisCart.products.splice(cartProduct);
       const index = thisCart.products.findIndex(
         (item) => item.id === cartProduct.id
@@ -539,6 +539,7 @@
       if (index !== -1) {
         thisCart.products.splice(index, 1);
       }
+      cartProduct.dom.wrapper.remove();
       thisCart.update();
 
       console.log('tablica', thisCart.products);
