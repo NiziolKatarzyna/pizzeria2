@@ -342,7 +342,7 @@
 
       thisWidget.getElements(element);
 
-      if (!isNaN(thisWidget.input.value)) {
+      if (!thisWidget.input.value) {
         thisWidget.setValue(settings.amountWidget.defaultValue);
       } else {
         thisWidget.setValue(thisWidget.input.value);
@@ -351,7 +351,6 @@
       thisWidget.initActions();
 
       console.log('AmountWidget: ', thisWidget);
-      console.log('constructor arguments: ', element);
     }
 
     getElements(element) {
@@ -444,11 +443,17 @@
       thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(
         select.cart.totalPrice
       );
-      console.log('total', thisCart.dom.totalPrice);
+
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(
         select.cart.totalNumber
       );
       thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+      thisCart.dom.phone = thisCart.dom.wrapper.querySelector(
+        select.cart.phone
+      );
+      thisCart.dom.address = thisCart.dom.wrapper.querySelector(
+        select.cart.address
+      );
     }
 
     initActions() {
@@ -462,7 +467,13 @@
       });
 
       thisCart.dom.productList.addEventListener('remove', function (event) {
+        event.preventDefault();
         thisCart.remove(event.detail.cartProduct);
+      });
+
+      thisCart.dom.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        thisCart.sendOrder();
       });
     }
 
@@ -485,15 +496,18 @@
     update() {
       const thisCart = this;
       const deliveryFee = settings.cart.defaultDeliveryFee;
+      thisCart.deliveryFee = deliveryFee;
       let totalNumber = 0;
+      thisCart.totalNumber = totalNumber;
       let subtotalPrice = 0;
+      thisCart.subtotalPrice = subtotalPrice;
 
       for (let product of thisCart.products) {
-        totalNumber += product.amount;
-        subtotalPrice += product.price;
+        thisCart.totalNumber += product.amount;
+        thisCart.subtotalPrice += product.price;
       }
-      if (totalNumber != 0) {
-        thisCart.totalPrice = subtotalPrice + deliveryFee;
+      if (thisCart.totalNumber != 0) {
+        thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
 
         console.log('total price', thisCart.totalPrice);
       } else {
@@ -503,11 +517,11 @@
       let totalPrice = thisCart.totalPrice;
 
       thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
-      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+      thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
       thisCart.dom.totalPrice.forEach((element) => {
         element.innerHTML = totalPrice;
       });
-      thisCart.dom.totalNumber.innerHTML = totalNumber;
+      thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
     }
 
     remove(cartProduct) {
@@ -528,6 +542,36 @@
       thisCart.update();
 
       console.log('tablica', thisCart.products);
+    }
+
+    sendOrder() {
+      const thisCart = this;
+      const url = settings.db.url + '/' + settings.db.orders;
+
+      const payload = {
+        address: thisCart.dom.address.value,
+        phone: thisCart.dom.phone.value,
+        totalPrice: thisCart.totalPrice,
+        subtotalPrice: thisCart.subtotalPrice,
+        totalNumber: thisCart.totalNumber,
+        deliveryFee: thisCart.deliveryFee,
+        products: [],
+      };
+      console.log('orders', payload);
+
+      for (let prod of thisCart.products) {
+        payload.products.push(prod.getData());
+      }
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+
+      fetch(url, options);
     }
   }
 
@@ -604,6 +648,18 @@
         event.preventDefault();
         thisCartProduct.remove();
       });
+    }
+    getData() {
+      const thisCartProduct = this;
+      const getDataSummary = {
+        id: thisCartProduct.id,
+        name: thisCartProduct.name,
+        amount: thisCartProduct.amount,
+        priceSingle: thisCartProduct.priceSingle,
+        price: thisCartProduct.price,
+        params: thisCartProduct.params,
+      };
+      return getDataSummary;
     }
   }
 
