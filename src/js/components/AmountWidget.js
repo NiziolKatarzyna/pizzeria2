@@ -14,7 +14,7 @@ class AmountWidget {
 
     thisWidget.initActions();
 
-    console.log('AmountWidget: ', thisWidget);
+    //console.log('AmountWidget: ', thisWidget);
   }
 
   getElements(element) {
