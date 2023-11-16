@@ -40,7 +40,15 @@ class Booking {
     );
     thisBooking.dom.allTables =
       thisBooking.dom.wrapper.querySelector('.floor-plan');
-    console.log('table', thisBooking.dom.allTables);
+
+    thisBooking.dom.bookingForm =
+      thisBooking.dom.wrapper.querySelector('.booking-form');
+
+    thisBooking.dom.phone =
+      thisBooking.dom.wrapper.querySelector('[name="phone"]');
+
+    thisBooking.dom.address =
+      thisBooking.dom.wrapper.querySelector('[name="address"]');
   }
 
   initWidgets() {
@@ -51,6 +59,7 @@ class Booking {
     thisBooking.hoursAmountWidget = new AmountWidget(
       thisBooking.dom.hoursAmount
     );
+
     thisBooking.datePickerWidget = new DatePicker(thisBooking.dom.datePicker);
 
     thisBooking.hourPickerWidget = new HourPicker(thisBooking.dom.hourPicker);
@@ -71,6 +80,11 @@ class Booking {
       event.preventDefault();
 
       thisBooking.initTables(event);
+    });
+
+    thisBooking.dom.bookingForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      thisBooking.sendBooking();
     });
   }
 
@@ -225,10 +239,8 @@ class Booking {
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ) {
         table.classList.add(classNames.booking.tableBooked);
-        console.log('add', table);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
-        console.log('remove', table);
       }
     }
   }
@@ -267,7 +279,43 @@ class Booking {
     thisBooking.selectedTables.forEach((table) => {
       table.classList.remove(classNames.booking.tableSelected);
     });
-    thisBooking.selectedTableId = null;
+  }
+
+  sendBooking() {
+    const thisBooking = this;
+    const url = settings.db.url + '/' + settings.db.bookings;
+
+    const reservation = {
+      date: thisBooking.datePickerWidget.value,
+      hour: thisBooking.hourPickerWidget.value,
+      table: thisBooking.selectedTableId,
+      duration: thisBooking.hoursAmountWidget.value,
+      ppl: thisBooking.peopleAmountWidget.value,
+      starters: [],
+      phone: thisBooking.dom.phone.value,
+      address: thisBooking.dom.address.value,
+    };
+
+    // Znajdź element z klasą "booking-options"
+    const bookingOptions = document.querySelector('.booking-options');
+
+    // Znajdź element z klasą "booking-option-title" wewnątrz "booking-options"
+    const startersTitle = bookingOptions.querySelector('.booking-option-title');
+
+    // Znajdź rodzica elementu z klasą "booking-option-title"
+    const startersContainer = startersTitle.parentElement;
+
+    // Znajdź wszystkie checkboxy wewnątrz kontenera
+    const checkboxInputs = startersContainer.querySelectorAll(
+      'input[type="checkbox"]'
+    );
+
+    // Utwórz tablicę z informacjami o checkboxach
+    //const starters = [];
+    checkboxInputs.forEach((checkbox) => {
+      if (checkbox.checked) reservation.starters.push(checkbox.value);
+    });
+    console.log('rez', reservation);
   }
 }
 
