@@ -288,7 +288,7 @@ class Booking {
     const reservation = {
       date: thisBooking.datePickerWidget.value,
       hour: thisBooking.hourPickerWidget.value,
-      table: thisBooking.selectedTableId,
+      table: parseInt(thisBooking.selectedTableId),
       duration: thisBooking.hoursAmountWidget.value,
       ppl: thisBooking.peopleAmountWidget.value,
       starters: [],
@@ -296,26 +296,37 @@ class Booking {
       address: thisBooking.dom.address.value,
     };
 
-    // Znajdź element z klasą "booking-options"
     const bookingOptions = document.querySelector('.booking-options');
 
-    // Znajdź element z klasą "booking-option-title" wewnątrz "booking-options"
     const startersTitle = bookingOptions.querySelector('.booking-option-title');
 
-    // Znajdź rodzica elementu z klasą "booking-option-title"
     const startersContainer = startersTitle.parentElement;
 
-    // Znajdź wszystkie checkboxy wewnątrz kontenera
     const checkboxInputs = startersContainer.querySelectorAll(
       'input[type="checkbox"]'
     );
 
-    // Utwórz tablicę z informacjami o checkboxach
-    //const starters = [];
     checkboxInputs.forEach((checkbox) => {
       if (checkbox.checked) reservation.starters.push(checkbox.value);
     });
     console.log('rez', reservation);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reservation),
+    };
+
+    fetch(url, options);
+    thisBooking.makeBooked(
+      reservation.date,
+      reservation.hour,
+      reservation.duration,
+      reservation.table
+    );
+    thisBooking.updateDOM();
   }
 }
 
