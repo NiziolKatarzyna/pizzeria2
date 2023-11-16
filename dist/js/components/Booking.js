@@ -11,7 +11,7 @@ class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
 
-    let selectedTableId = 0;
+    thisBooking.selectedTable = null;
   }
   render(element) {
     const thisBooking = this;
@@ -201,6 +201,7 @@ class Booking {
     const thisBooking = this;
     thisBooking.date = thisBooking.datePickerWidget.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPickerWidget.value);
+    thisBooking.removeSelectedTable();
 
     let allAvailable = false;
     if (
@@ -242,25 +243,31 @@ class Booking {
     );
     const selectedTable = event.target;
 
-    thisBooking.selectedTables = document.querySelectorAll('.table');
+    //thisBooking.selectedTables = document.querySelectorAll('.table');
     const isSelected = selectedTable.classList.contains(
       classNames.booking.tableSelected
     );
 
     if (parseInt(thisBooking.selectedTableId) > 0) {
-      thisBooking.selectedTables.forEach((table) => {
-        table.classList.remove(classNames.booking.tableSelected);
-      });
+      thisBooking.removeSelectedTable();
       if (bookedTable) {
         alert('Stolik zajęty');
-      }
-      if (isSelected) {
+      } else if (isSelected) {
         selectedTable.classList.remove(classNames.booking.tableSelected);
       } else {
         selectedTable.classList.add(classNames.booking.tableSelected);
         console.log('table selected', thisBooking.selectedTables);
       }
     }
+  }
+  removeSelectedTable() {
+    const thisBooking = this;
+    thisBooking.selectedTables = document.querySelectorAll('.table');
+
+    thisBooking.selectedTables.forEach((table) => {
+      table.classList.remove(classNames.booking.tableSelected);
+    });
+    thisBooking.selectedTableId = null;
   }
 }
 
