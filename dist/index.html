@@ -10,8 +10,8 @@
       rel="stylesheet"
     />
     <link
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
       rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"
     />
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -19,6 +19,10 @@
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
     <link rel="stylesheet" href="vendor/range-slider.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
   </head>
   <body>
     <header class="header">
@@ -29,6 +33,7 @@
             <h2 class="logo__subtitle">the best homemade Italian food</h2>
           </div>
           <div class="main-nav">
+            <a href="#home">Home</a>
             <a href="#order">Order</a>
             <a href="#booking">Booking</a>
           </div>
@@ -83,6 +88,9 @@
     </header>
 
     <div id="pages">
+      <section id="home">
+        <div id="home-wrapper" class="home-list container"></div>
+      </section>
       <section id="order">
         <div id="product-list" class="product-list container"></div>
       </section>
@@ -290,9 +298,164 @@
         </form>
       </div>
     </script>
+
+    <section class="home_container">
+      <div class="container">
+        <header class="home_header_container">
+          <div class="row">
+            <div id="animation1" class="col-6" ">
+              <div class="image_container">
+                <img
+                  src="https://i.postimg.cc/9Qb3WD2Z/pizza-1.jpg"
+                  alt="pizza"
+                />
+              </div>
+              <div class="image-text">
+                <h3>order online</h3>
+                <p class="image_title_text">
+                  Delicious food delivered to your door
+                </p>
+              </div>
+            </div>
+            <div id="animation2" class="col-6">
+              <div class="image_container">
+                <img
+                  src="https://i.postimg.cc/5tXsZy2x/pizza-2.jpg"
+                  alt="pizza"
+                />
+              </div>
+              <div class="image-text">
+                <h3>book a table</h3>
+              </div>
+            </div>
+          </div>
+          <div class="intro">
+            <div class="row">
+              <div class="col-12">
+                <h3>Opening Hours</h3>
+                <p>mon-sun 12pm-11pm</p>
+              </div>
+            </div>
+          </div>
+        </header>
+        <section class="home_carousel">
+          <div class="container">
+            <div class="main-carousel" data-flickity='{ "wrapAround": true}'>
+              <div class="carousel-cell">
+                <img src="pizzeria-home/car.jpg" />
+              </div>
+              <div class="carousel-cell">
+                <h4>Amazing service</h4>
+                <p>
+                  The atmosphere and food was great, me and my friends had a
+                  great time a next time we're nearby we'll definitely stob by
+                  again!<br />
+                  <span>Ala</span>
+                </p>
+              </div>
+              <div class="carousel-cell">
+                <img src="pizzeria-home/car.jpg" />
+              </div>
+              <div class="carousel-cell">
+                <h4>Great menu</h4>
+                <p>
+                  Me and my family were in Nano Ban Restaurant at the end of
+                  June. The place is fantastic and food is delicious. Especially
+                  I can recommend calamari, veal and lamb.<br /><span>
+                    Piotrek</span
+                  >
+                </p>
+              </div>
+              <div class="carousel-cell">
+                <img src="pizzeria-home/car.jpg" />
+              </div>
+              <div class="carousel-cell">
+                <h4>About restaurant</h4>
+                <p>
+                  Me and my mother went there last evening and had house
+                  speciality,and it was the best sea food we ever tasted in our
+                  life. I give this restaurant a big five!
+                  <br /><span>Ala</span>
+                </p>
+              </div>
+              <div class="carousel-cell">
+                <img src="https://i.postimg.cc/8Cddpz1Q/pizza-3.jpg" />
+              </div>
+              <div class="carousel-cell">
+                <h4>Great place, great food</h4>
+                <p>
+                  Lovely place in the middle of the island. Outdoor grill for
+                  lamb, veal, Steak and fish. Friendly staff, good for dogs and
+                  kids.
+                  <br /><span>Ala</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="home_gallery">
+          <div class="container">
+            <div class="gallery">
+              <div class="row">
+                <div class="col-4">
+                  <img src="pizzeria-home/1.jpg" alt="image" />
+                  <div class="icon_gallery">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-envelope"></i>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <img src="pizzeria-home/2.jpg" alt="image" />
+                  <div class="icon_gallery">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-envelope"></i>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <img src="pizzeria-home/3.jpg" alt="image" />
+                  <div class="icon_gallery">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-envelope"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <img src="pizzeria-home/4.jpg" alt="image" />
+                  <div class="icon_gallery">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-envelope"></i>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <img src="pizzeria-home/5.jpg" alt="image" />
+                  <div class="icon_gallery">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-envelope"></i>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <img src="pizzeria-home/6.jpg" alt="image" />
+                  <div class="icon_gallery">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-envelope"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer class="page-footer">
+          <div class="container">
+            <a href="" class="footer">View more on instagram</a>
+          </div>
+        </footer>
+      </div>
+    </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="vendor/range-slider.min.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script src="js/app.js" type="module"></script>
   </body>
 </html>
