@@ -11,7 +11,7 @@ class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
 
-    thisBooking.selectedTable = null;
+    thisBooking.selectedTableId = null;
   }
   render(element) {
     const thisBooking = this;
