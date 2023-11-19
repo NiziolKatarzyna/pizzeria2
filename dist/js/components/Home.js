@@ -15,7 +15,7 @@ class Home {
 
     const elem = document.querySelector('.main-carousel');
     console.log(elem);
-    // eslint-disable-next-line no-undef
+
     thisHome.dom.carousel = new Flickity(elem, {
       wrapAround: true,
       groupCells: 2,
@@ -27,12 +27,14 @@ class Home {
   }
   setupEventListeners() {
     const thisHome = this;
-    thisHome.imageAnimationOrder.addEventListener('click', () =>
-      thisHome.redirectToOrder()
-    );
-    thisHome.imageAnimationBooking.addEventListener('click', () =>
-      thisHome.redirectToBooking()
-    );
+    thisHome.imageAnimationOrder.addEventListener('click', (event) => {
+      event.preventDefault();
+      thisHome.redirectToOrder();
+    });
+    thisHome.imageAnimationBooking.addEventListener('click', (event) => {
+      event.preventDefault();
+      thisHome.redirectToBooking();
+    });
   }
 
   redirectToOrder() {
