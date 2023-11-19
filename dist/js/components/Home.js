@@ -15,6 +15,7 @@ class Home {
 
     const elem = document.querySelector('.main-carousel');
     console.log(elem);
+    // eslint-disable-next-line no-undef
     thisHome.dom.carousel = new Flickity(elem, {
       wrapAround: true,
       groupCells: 2,
