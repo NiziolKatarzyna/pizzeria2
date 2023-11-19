@@ -19,10 +19,7 @@
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
     <link rel="stylesheet" href="vendor/range-slider.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
-    />
+    <link rel="stylesheet" href="vendor/flickity.min.css" media="screen" />
   </head>
   <body>
     <header class="header">
@@ -303,7 +300,7 @@
       <div class="container">
         <header class="home_header_container">
           <div class="row">
-            <div id="animation1" class="col-6" ">
+            <div id="animation1" class="col-6">
               <div class="image_container">
                 <img
                   src="https://i.postimg.cc/9Qb3WD2Z/pizza-1.jpg"
@@ -340,9 +337,12 @@
         </header>
         <section class="home_carousel">
           <div class="container">
-            <div class="main-carousel" data-flickity='{ "wrapAround": true}'>
+            <div
+              class="main-carousel"
+              data-flickity='{ "wrapAround": true, "autoPlay": true,  "groupCells": 2 }'
+            >
               <div class="carousel-cell">
-                <img src="pizzeria-home/car.jpg" />
+                <img src="pizzeria-home/car.jpg" alt="image" />
               </div>
               <div class="carousel-cell">
                 <h4>Amazing service</h4>
@@ -354,7 +354,7 @@
                 </p>
               </div>
               <div class="carousel-cell">
-                <img src="pizzeria-home/car.jpg" />
+                <img src="pizzeria-home/car.jpg" alt="image" />
               </div>
               <div class="carousel-cell">
                 <h4>Great menu</h4>
@@ -367,7 +367,7 @@
                 </p>
               </div>
               <div class="carousel-cell">
-                <img src="pizzeria-home/car.jpg" />
+                <img src="pizzeria-home/car.jpg" alt="image" />
               </div>
               <div class="carousel-cell">
                 <h4>About restaurant</h4>
@@ -379,7 +379,10 @@
                 </p>
               </div>
               <div class="carousel-cell">
-                <img src="https://i.postimg.cc/8Cddpz1Q/pizza-3.jpg" />
+                <img
+                  src="https://i.postimg.cc/8Cddpz1Q/pizza-3.jpg"
+                  alt="image"
+                />
               </div>
               <div class="carousel-cell">
                 <h4>Great place, great food</h4>
@@ -455,7 +458,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="vendor/range-slider.min.js"></script>
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="vendor/flickity.pkgd.min.js"></script>
     <script src="js/app.js" type="module"></script>
   </body>
 </html>

@@ -3,13 +3,8 @@ class Home {
     const thisHome = this;
     thisHome.dom = element;
     thisHome.render(element);
-    thisHome.getElement();
-    thisHome.imageAnimationOrder.addEventListener('click', () =>
-      thisHome.redirectToOrder()
-    );
-    thisHome.imageAnimationBooking.addEventListener('click', () =>
-      thisHome.redirectToBooking()
-    );
+
+    thisHome.setupEventListeners();
   }
   render(element) {
     const thisHome = this;
@@ -20,7 +15,6 @@ class Home {
 
     const elem = document.querySelector('.main-carousel');
     console.log(elem);
-
     thisHome.dom.carousel = new Flickity(elem, {
       wrapAround: true,
       groupCells: 2,
@@ -28,7 +22,18 @@ class Home {
       imagesLoaded: true,
       lazyLoad: true,
     });
+    console.log;
   }
+  setupEventListeners() {
+    const thisHome = this;
+    thisHome.imageAnimationOrder.addEventListener('click', () =>
+      thisHome.redirectToOrder()
+    );
+    thisHome.imageAnimationBooking.addEventListener('click', () =>
+      thisHome.redirectToBooking()
+    );
+  }
+
   redirectToOrder() {
     const thisHome = this;
     thisHome.orderLink = document.querySelector('a[href="#order"]');
@@ -38,11 +43,6 @@ class Home {
     const thisHome = this;
     thisHome.bookingLink = document.querySelector('a[href="#booking"]');
     thisHome.bookingLink.click();
-  }
-
-  getElement() {
-    const thisHome = this;
-    thisHome.orderLink = document.querySelector('a[href="#order"]');
   }
 }
 

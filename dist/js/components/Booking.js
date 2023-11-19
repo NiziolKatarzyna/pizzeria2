@@ -285,6 +285,15 @@ class Booking {
     const thisBooking = this;
     const url = settings.db.url + '/' + settings.db.bookings;
 
+    if (
+      !thisBooking.selectedTableId ||
+      !thisBooking.dom.phone.value ||
+      !thisBooking.dom.phone.value
+    ) {
+      alert('Proszę uzupełnić dane przed złożeniem rezerwacji.');
+      return;
+    }
+
     const reservation = {
       date: thisBooking.datePickerWidget.value,
       hour: thisBooking.hourPickerWidget.value,
@@ -293,7 +302,7 @@ class Booking {
       ppl: thisBooking.peopleAmountWidget.value,
       starters: [],
       phone: thisBooking.dom.phone.value,
-      address: thisBooking.dom.address.value,
+      address: thisBooking.dom.phone.value,
     };
 
     const bookingOptions = document.querySelector('.booking-options');
@@ -327,6 +336,7 @@ class Booking {
       reservation.table
     );
     thisBooking.updateDOM();
+    thisBooking.selectedTableId = null;
   }
 }
 
