@@ -288,7 +288,7 @@ class Booking {
     if (
       !thisBooking.selectedTableId ||
       !thisBooking.dom.phone.value ||
-      !thisBooking.dom.phone.value
+      !thisBooking.dom.address.value
     ) {
       alert('Proszę uzupełnić dane przed złożeniem rezerwacji.');
       return;
@@ -302,7 +302,7 @@ class Booking {
       ppl: thisBooking.peopleAmountWidget.value,
       starters: [],
       phone: thisBooking.dom.phone.value,
-      address: thisBooking.dom.phone.value,
+      address: thisBooking.dom.address.value,
     };
 
     const bookingOptions = document.querySelector('.booking-options');

@@ -97,6 +97,7 @@ class Cart {
     for (let product of thisCart.products) {
       thisCart.totalNumber += product.amount;
       thisCart.subtotalPrice += product.price;
+      product.dom.amountWidget.value = product.amount;
     }
     if (thisCart.totalNumber != 0) {
       thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;

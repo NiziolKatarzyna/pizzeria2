@@ -45,7 +45,9 @@ class CartProduct {
       function (event) {
         event.preventDefault();
         //thisCartProduct.dom.amountWidget.value zmienia wartość na 1
+
         thisCartProduct.amount = thisCartProduct.dom.amountWidget.value;
+
         thisCartProduct.price =
           thisCartProduct.priceSingle * thisCartProduct.amount;
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
